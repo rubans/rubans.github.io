@@ -1,0 +1,308 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Autocomplete Control Using Rx &#8211; Coding Adventures!</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+
+
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Autocomplete Control Using Rx">
+<meta property="og:description" content="">
+<meta property="og:url" content="http://localhost:4000//autocomplete-control-using-rx/">
+<meta property="og:site_name" content="Coding Adventures!">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000//autocomplete-control-using-rx/">
+<link href="http://localhost:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Coding Adventures! Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000//assets/css/main.min.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="http://localhost:4000//assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000//favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000//favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000//images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000//images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000//images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000//images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+	        
+			<li>
+				
+					<a href="http://localhost:4000//about/">About</a>
+				 
+			</li>
+	        
+	        <li><a href="http://localhost:4000//feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
+	        <li class="dosearch"><i class="icon-search"></i> Search</li>
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<div class="search-wrapper">
+	<div class="search-form">
+		<input type="text" class="search-field" placeholder="Search...">
+		<i class="icon-remove-sign icon-2x"></i>
+		<ul class="search-results post-list"></ul><!-- /.search-results -->
+	</div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<header class="masthead">
+	<div class="wrap">
+        
+        <h1 class="site-title animated fadeIn"><a href="http://localhost:4000//">Coding Adventures!</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description"></h2>
+	</div>
+</header><!-- /.masthead -->
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"></span>
+        
+          <h1 class="entry-title">Autocomplete Control Using Rx</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        <img src="http://localhost:4000//images/bio-photo.jpg" alt="Ruban Siva photo" class="author-photo">
+        <span class="author vcard">By <span class="fn"><a href="http://localhost:4000//about/" title="About Ruban Siva">Ruban Siva</a></span></span>
+        
+        <span class="entry-date date published"><time datetime="2014-07-02T00:00:00+01:00"><i class="icon-calendar-empty"></i> July 02, 2014</time></span>
+        
+        
+        <span><a href="http://localhost:4000//autocomplete-control-using-rx/" rel="bookmark" title="Autocomplete Control Using Rx"><i class="icon-link"></i> Permalink</a></span>
+        
+      </footer>
+      <div class="entry-content">
+        <p>While attempting to implement a “Goggle search like” auto complete control, I looked at different ways of doing it. 
+What I wanted was to have a Auto complete text box ( similar to Google Search) which would display possible results on each keystroke with some sort of minimum delay so that search is not executed until really necessary.
+Using the Telerik RadAutoComplete WPF control, the usual way would have been to using event handlers to capture key strokes onkeydown event and then perform the search. However, using RX (Reactive Extensions) I found it’s much simpler and able to achieve the objective with less code.</p>
+
+<p>To start with, the original example (without Rx) is available here:
+<a href="http://blogs.telerik.com/xamlteam/posts/14-04-30/how-to-add-minimum-populate-delay-in-radautocompletebox-for-wpf-sliverlight">http://blogs.telerik.com/xamlteam/posts/14-04-30/how-to-add-minimum-populate-delay-in-radautocompletebox-for-wpf-sliverlight</a></p>
+
+<pre><code>	public MainWindow()
+    {
+        InitializeComponent();
+        this.timer.Interval = TimeSpan.FromSeconds((this.DataContext as ViewModel).SelectedDelay);
+        this.AutoCompleteBox.AddHandler(Control.KeyDownEvent, new KeyEventHandler(OnAutoCompleteBoxKeyDown), true);
+    }
+
+    private void OnAutoCompleteBoxSearchTextChanged(object sender, EventArgs e)
+    {
+        if (this.isDeleting || string.IsNullOrEmpty(this.AutoCompleteBox.SearchText))
+        {
+            this.AutoCompleteBox.Populate(string.Empty);
+        }
+        else
+        {
+            if (this.timer != null &amp;&amp; this.timer.IsEnabled)
+            {
+                this.timer.Stop();
+                this.timer.Start();
+            }
+            else
+            {
+                if (this.timer != null)
+                {
+                    this.timer.Start();
+                    this.timer.Tick += OnTimerTick;
+                }
+            }
+
+            this.SetStatusBusyIndicator(true);
+            this.DisabledOverlay.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        this.isHandled = true;
+    }
+
+    private void OnTimerTick(object sender, EventArgs e)
+    {
+        this.timer.Stop();
+        this.SetStatusBusyIndicator(false);
+        this.DisabledOverlay.Visibility = System.Windows.Visibility.Collapsed;
+        this.isHandled = false;
+        if (!this.isDeleting)
+        {
+            this.AutoCompleteBox.Populate(this.AutoCompleteBox.SearchText);
+        }
+    }
+
+    private void OnAutoCompleteBoxPopulating(object sender, CancelRoutedEventArgs e)
+    {
+        e.Cancel = this.isHandled;
+    }
+
+    private void OnAutoCompleteBoxKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Escape || (Keyboard.Modifiers == ModifierKeys.Control &amp;&amp; e.Key == Key.X))
+        {
+            this.isDeleting = true;
+            this.AutoCompleteBox.IsDropDownOpen = false;
+            this.SetStatusBusyIndicator(false);
+            this.DisabledOverlay.Visibility = System.Windows.Visibility.Collapsed;
+        }
+        else
+        {
+            if (e.Key != Key.Up &amp;&amp; e.Key != Key.Down)
+            {
+                this.AutoCompleteBox.IsDropDownOpen = false;
+                if (e.Key == Key.Enter &amp;&amp; this.isDeleting)
+                {
+                    this.isHandled = false;
+                    this.AutoCompleteBox.Populate(this.AutoCompleteBox.SearchText);
+                }
+            }
+
+            this.isDeleting = false;
+        }
+    } The original code which handled the onkey event handlers and search:
+</code></pre>
+
+<p>Using Reactive UI (based on Rx), I was able to refactor it down to:</p>
+
+<pre><code>	public ViewModel()
+    {
+        //GetItems();
+        this.delays = new ObservableCollection&lt;int&gt;()
+        {
+            1, 2, 3, 4, 5
+        };
+        this.selectedDelay = this.delays[1];
+
+        var executeSearchCommand = new ReactiveCommand();
+        var results = executeSearchCommand.RegisterAsyncFunction(s =&gt; { return ExecuteSearch(s as string); });
+        _executeSearchCommand = executeSearchCommand;
+
+        this.ObservableForProperty&lt;ViewModel, string&gt;("SearchText")
+            .Throttle(TimeSpan.FromMilliseconds(800))
+            .Select(x =&gt; x.Value)
+            .DistinctUntilChanged()
+            .Where(x =&gt; !string.IsNullOrWhiteSpace(x))
+            .Subscribe(_executeSearchCommand.Execute);
+
+        _searchResults = new ObservableAsPropertyHelper&lt;ObservableCollection&lt;Item&gt;&gt;(results, _ =&gt; raisePropertyChanged("SearchResults"));
+
+    }
+</code></pre>
+
+<p>So you can cut down a lot of event handling code using Rx and reckon much easier to read without the need for multiple functions.</p>
+
+<p>The full code sample is available on:
+<a href="https://github.com/rubans/gitprojects/tree/master/RadAutoCompleteExample/MinimumPopulateDelayRx">https://github.com/rubans/gitprojects/tree/master/RadAutoCompleteExample/MinimumPopulateDelayRx</a></p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2014 Ruban Siva. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/">So Simple Theme</a>.</span>
+<div class="social-icons">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000//assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000//assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function() {
+      $('.search-field').simpleJekyllSearch({
+          jsonFile : 'http://localhost:4000//search.json',
+          searchResults : '.search-results',
+          template : '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+          noResults: '<p>Nothing found.</p>'
+        });
+  });
+
+  (function( $, window, undefined ) {
+    
+     var bs = {
+          close: $(".icon-remove-sign"),
+          searchform: $(".search-form"),
+          canvas: $("body"),
+          dothis: $('.dosearch')
+      };
+    
+    bs.dothis.on('click', function() {
+      $('.search-wrapper').css({ display: "block" });
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('search-overlay');
+    });
+    
+      bs.close.on('click', function() {
+        $('.search-wrapper').removeAttr( 'style' );
+        bs.searchform.toggleClass('active');
+        bs.canvas.removeClass('search-overlay');
+    });
+  })( jQuery, window );
+</script>
+
+
+	        
+
+</body>
+</html>
