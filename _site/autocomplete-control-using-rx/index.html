@@ -124,83 +124,85 @@ Using the Telerik RadAutoComplete WPF control, the usual way would have been to 
 <p>To start with, the original example (without Rx) is available here:
 <a href="http://blogs.telerik.com/xamlteam/posts/14-04-30/how-to-add-minimum-populate-delay-in-radautocompletebox-for-wpf-sliverlight">http://blogs.telerik.com/xamlteam/posts/14-04-30/how-to-add-minimum-populate-delay-in-radautocompletebox-for-wpf-sliverlight</a></p>
 
-<pre><code>	public MainWindow()
-    {
-        InitializeComponent();
-        this.timer.Interval = TimeSpan.FromSeconds((this.DataContext as ViewModel).SelectedDelay);
-        this.AutoCompleteBox.AddHandler(Control.KeyDownEvent, new KeyEventHandler(OnAutoCompleteBoxKeyDown), true);
-    }
+<p>The original code which handled the onkey event handlers and search:</p>
 
-    private void OnAutoCompleteBoxSearchTextChanged(object sender, EventArgs e)
+<pre><code>public MainWindow()
+{
+    InitializeComponent();
+    this.timer.Interval = TimeSpan.FromSeconds((this.DataContext as ViewModel).SelectedDelay);
+    this.AutoCompleteBox.AddHandler(Control.KeyDownEvent, new KeyEventHandler(OnAutoCompleteBoxKeyDown), true);
+}
+
+private void OnAutoCompleteBoxSearchTextChanged(object sender, EventArgs e)
+{
+    if (this.isDeleting || string.IsNullOrEmpty(this.AutoCompleteBox.SearchText))
     {
-        if (this.isDeleting || string.IsNullOrEmpty(this.AutoCompleteBox.SearchText))
+        this.AutoCompleteBox.Populate(string.Empty);
+    }
+    else
+    {
+        if (this.timer != null &amp;&amp; this.timer.IsEnabled)
         {
-            this.AutoCompleteBox.Populate(string.Empty);
+            this.timer.Stop();
+            this.timer.Start();
         }
         else
         {
-            if (this.timer != null &amp;&amp; this.timer.IsEnabled)
+            if (this.timer != null)
             {
-                this.timer.Stop();
                 this.timer.Start();
+                this.timer.Tick += OnTimerTick;
             }
-            else
-            {
-                if (this.timer != null)
-                {
-                    this.timer.Start();
-                    this.timer.Tick += OnTimerTick;
-                }
-            }
-
-            this.SetStatusBusyIndicator(true);
-            this.DisabledOverlay.Visibility = System.Windows.Visibility.Visible;
         }
 
-        this.isHandled = true;
+        this.SetStatusBusyIndicator(true);
+        this.DisabledOverlay.Visibility = System.Windows.Visibility.Visible;
     }
 
-    private void OnTimerTick(object sender, EventArgs e)
+    this.isHandled = true;
+}
+
+private void OnTimerTick(object sender, EventArgs e)
+{
+    this.timer.Stop();
+    this.SetStatusBusyIndicator(false);
+    this.DisabledOverlay.Visibility = System.Windows.Visibility.Collapsed;
+    this.isHandled = false;
+    if (!this.isDeleting)
     {
-        this.timer.Stop();
+        this.AutoCompleteBox.Populate(this.AutoCompleteBox.SearchText);
+    }
+}
+
+private void OnAutoCompleteBoxPopulating(object sender, CancelRoutedEventArgs e)
+{
+    e.Cancel = this.isHandled;
+}
+
+private void OnAutoCompleteBoxKeyDown(object sender, KeyEventArgs e)
+{
+    if (e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Escape || (Keyboard.Modifiers == ModifierKeys.Control &amp;&amp; e.Key == Key.X))
+    {
+        this.isDeleting = true;
+        this.AutoCompleteBox.IsDropDownOpen = false;
         this.SetStatusBusyIndicator(false);
         this.DisabledOverlay.Visibility = System.Windows.Visibility.Collapsed;
-        this.isHandled = false;
-        if (!this.isDeleting)
-        {
-            this.AutoCompleteBox.Populate(this.AutoCompleteBox.SearchText);
-        }
     }
-
-    private void OnAutoCompleteBoxPopulating(object sender, CancelRoutedEventArgs e)
+    else
     {
-        e.Cancel = this.isHandled;
-    }
-
-    private void OnAutoCompleteBoxKeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Escape || (Keyboard.Modifiers == ModifierKeys.Control &amp;&amp; e.Key == Key.X))
+        if (e.Key != Key.Up &amp;&amp; e.Key != Key.Down)
         {
-            this.isDeleting = true;
             this.AutoCompleteBox.IsDropDownOpen = false;
-            this.SetStatusBusyIndicator(false);
-            this.DisabledOverlay.Visibility = System.Windows.Visibility.Collapsed;
-        }
-        else
-        {
-            if (e.Key != Key.Up &amp;&amp; e.Key != Key.Down)
+            if (e.Key == Key.Enter &amp;&amp; this.isDeleting)
             {
-                this.AutoCompleteBox.IsDropDownOpen = false;
-                if (e.Key == Key.Enter &amp;&amp; this.isDeleting)
-                {
-                    this.isHandled = false;
-                    this.AutoCompleteBox.Populate(this.AutoCompleteBox.SearchText);
-                }
+                this.isHandled = false;
+                this.AutoCompleteBox.Populate(this.AutoCompleteBox.SearchText);
             }
-
-            this.isDeleting = false;
         }
-    } The original code which handled the onkey event handlers and search:
+
+        this.isDeleting = false;
+    }
+}
 </code></pre>
 
 <p>Using Reactive UI (based on Rx), I was able to refactor it down to:</p>
@@ -230,7 +232,7 @@ Using the Telerik RadAutoComplete WPF control, the usual way would have been to 
     }
 </code></pre>
 
-<p>So you can cut down a lot of event handling code using Rx and reckon much easier to read without the need for multiple functions.</p>
+<p>So you can cut down a lot of event handling code using Rx and reckon much easier to read without the need for multiple event handler methods.</p>
 
 <p>The full code sample is available on:
 <a href="https://github.com/rubans/gitprojects/tree/master/RadAutoCompleteExample/MinimumPopulateDelayRx">https://github.com/rubans/gitprojects/tree/master/RadAutoCompleteExample/MinimumPopulateDelayRx</a></p>
