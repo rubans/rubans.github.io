@@ -7,26 +7,26 @@
 
 <title type="text">Coding Adventures!</title>
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="http://localhost:4000//feed.xml" />
-<link rel="alternate" type="text/html" href="http://localhost:4000//" />
-<updated>2014-07-06T16:41:13+01:00</updated>
-<id>http://localhost:4000//</id>
+<link rel="self" type="application/atom+xml" href="http://rubans.github.io/feed.xml" />
+<link rel="alternate" type="text/html" href="http://rubans.github.io/" />
+<updated>2014-07-06T22:35:43+01:00</updated>
+<id>http://rubans.github.io/</id>
 <author>
   <name>Ruban Siva</name>
-  <uri>http://localhost:4000//</uri>
+  <uri>http://rubans.github.io/</uri>
   <email>rubansiva@hotmail.com</email>
 </author>
 
 
 <entry>
   <title type="html"><![CDATA[Autocomplete Control Using Rx]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000//autocomplete-control-using-rx/"/>
-  <id>http://localhost:4000//autocomplete-control-using-rx</id>
+  <link rel="alternate" type="text/html" href="http://rubans.github.io/autocomplete-control-using-rx/"/>
+  <id>http://rubans.github.io/autocomplete-control-using-rx</id>
   <published>2014-07-02T00:00:00+01:00</published>
   <updated>2014-07-02T00:00:00+01:00</updated>
   <author>
     <name>Ruban Siva</name>
-    <uri>http://localhost:4000/</uri>
+    <uri>http://rubans.github.io</uri>
     <email>rubansiva@hotmail.com</email>
   </author>
   
@@ -153,19 +153,19 @@ private void OnAutoCompleteBoxKeyDown(object sender, KeyEventArgs e)
 &lt;a href=&quot;https://github.com/rubans/gitprojects/tree/master/RadAutoCompleteExample/MinimumPopulateDelayRx&quot;&gt;https://github.com/rubans/gitprojects/tree/master/RadAutoCompleteExample/MinimumPopulateDelayRx&lt;/a&gt;&lt;/p&gt;
 
   
-  &lt;p&gt;&lt;a href=&quot;http://localhost:4000//autocomplete-control-using-rx/&quot;&gt;Autocomplete Control Using Rx&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://localhost:4000/&quot;&gt;Coding Adventures!&lt;/a&gt; on July 02, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://rubans.github.io/autocomplete-control-using-rx/&quot;&gt;Autocomplete Control Using Rx&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://rubans.github.io&quot;&gt;Coding Adventures!&lt;/a&gt; on July 02, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Installing Ruby on Windows, the easy Way]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000//installing-ruby-on-windows-the-easy-way/"/>
-  <id>http://localhost:4000//installing-ruby-on-windows-the-easy-way</id>
+  <link rel="alternate" type="text/html" href="http://rubans.github.io/installing-ruby-on-windows-the-easy-way/"/>
+  <id>http://rubans.github.io/installing-ruby-on-windows-the-easy-way</id>
   <published>2014-06-26T00:00:00+01:00</published>
   <updated>2014-06-26T00:00:00+01:00</updated>
   <author>
     <name>Ruban Siva</name>
-    <uri>http://localhost:4000/</uri>
+    <uri>http://rubans.github.io</uri>
     <email>rubansiva@hotmail.com</email>
   </author>
   
@@ -183,19 +183,19 @@ gem install jekyll
 &lt;p&gt;That’s it.&lt;/p&gt;
 
   
-  &lt;p&gt;&lt;a href=&quot;http://localhost:4000//installing-ruby-on-windows-the-easy-way/&quot;&gt;Installing Ruby on Windows, the easy Way&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://localhost:4000/&quot;&gt;Coding Adventures!&lt;/a&gt; on June 26, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://rubans.github.io/installing-ruby-on-windows-the-easy-way/&quot;&gt;Installing Ruby on Windows, the easy Way&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://rubans.github.io&quot;&gt;Coding Adventures!&lt;/a&gt; on June 26, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Comparing Excel files]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000//comparing-excel-files/"/>
-  <id>http://localhost:4000//comparing-excel-files</id>
+  <link rel="alternate" type="text/html" href="http://rubans.github.io/comparing-excel-files/"/>
+  <id>http://rubans.github.io/comparing-excel-files</id>
   <published>2014-05-05T00:00:00+01:00</published>
   <updated>2014-05-05T00:00:00+01:00</updated>
   <author>
     <name>Ruban Siva</name>
-    <uri>http://localhost:4000/</uri>
+    <uri>http://rubans.github.io</uri>
     <email>rubansiva@hotmail.com</email>
   </author>
   
@@ -217,23 +217,23 @@ gem install jekyll
 &lt;a href=&quot;http://office.microsoft.com/en-001/excel-help/what-you-can-do-with-spreadsheet-inquire-HA102835926.aspx&quot;&gt;http://office.microsoft.com/en-001/excel-help/what-you-can-do-with-spreadsheet-inquire-HA102835926.aspx&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;It’s also available from your start menu (Windows 7) or through Search Charm (Windows 8) as Speadsheet Compare 2013.
-&lt;img src=&quot;../Images/posts/SpreadsheetCompare2013.jpg&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;http://rubans.github.io/Images/posts/SpreadsheetCompare2013.jpg&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
 
 
   
-  &lt;p&gt;&lt;a href=&quot;http://localhost:4000//comparing-excel-files/&quot;&gt;Comparing Excel files&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://localhost:4000/&quot;&gt;Coding Adventures!&lt;/a&gt; on May 05, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://rubans.github.io/comparing-excel-files/&quot;&gt;Comparing Excel files&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://rubans.github.io&quot;&gt;Coding Adventures!&lt;/a&gt; on May 05, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Add tracing to a legacy ASMX service]]></title>
-  <link rel="alternate" type="text/html" href="http://localhost:4000//add-tracing-to-a-legacy-asmx-service/"/>
-  <id>http://localhost:4000//add-tracing-to-a-legacy-asmx-service</id>
+  <link rel="alternate" type="text/html" href="http://rubans.github.io/add-tracing-to-a-legacy-asmx-service/"/>
+  <id>http://rubans.github.io/add-tracing-to-a-legacy-asmx-service</id>
   <published>2014-02-05T00:00:00+00:00</published>
   <updated>2014-02-05T00:00:00+00:00</updated>
   <author>
     <name>Ruban Siva</name>
-    <uri>http://localhost:4000/</uri>
+    <uri>http://rubans.github.io</uri>
     <email>rubansiva@hotmail.com</email>
   </author>
   
@@ -265,7 +265,7 @@ gem install jekyll
 
 
   
-  &lt;p&gt;&lt;a href=&quot;http://localhost:4000//add-tracing-to-a-legacy-asmx-service/&quot;&gt;Add tracing to a legacy ASMX service&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://localhost:4000/&quot;&gt;Coding Adventures!&lt;/a&gt; on February 05, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://rubans.github.io/add-tracing-to-a-legacy-asmx-service/&quot;&gt;Add tracing to a legacy ASMX service&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://rubans.github.io&quot;&gt;Coding Adventures!&lt;/a&gt; on February 05, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>
