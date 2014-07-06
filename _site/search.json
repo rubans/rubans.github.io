@@ -3,7 +3,7 @@
 		{
 		  "title"      : "Autocomplete Control Using Rx",
 		  "category"   : "",
-		  "url"        : "http://rubans.github.io/autocomplete-control-using-rx/",
+		  "url"        : "http://localhost:4000//autocomplete-control-using-rx/",
 		  "date"       : "2014-07-02 00:00:00 +0100",
 		  "shortdate"  : "July 02, 2014"
 		} ,
@@ -11,7 +11,7 @@
 		{
 		  "title"      : "Installing Ruby on Windows, the easy Way",
 		  "category"   : "",
-		  "url"        : "http://rubans.github.io/installing-ruby-on-windows-the-easy-way/",
+		  "url"        : "http://localhost:4000//installing-ruby-on-windows-the-easy-way/",
 		  "date"       : "2014-06-26 00:00:00 +0100",
 		  "shortdate"  : "June 26, 2014"
 		} ,
@@ -19,7 +19,7 @@
 		{
 		  "title"      : "Comparing Excel files",
 		  "category"   : "",
-		  "url"        : "http://rubans.github.io/comparing-excel-files/",
+		  "url"        : "http://localhost:4000//comparing-excel-files/",
 		  "date"       : "2014-05-05 00:00:00 +0100",
 		  "shortdate"  : "May 05, 2014"
 		} ,
@@ -27,7 +27,7 @@
 		{
 		  "title"      : "Add tracing to a legacy ASMX service",
 		  "category"   : "",
-		  "url"        : "http://rubans.github.io/add-tracing-to-a-legacy-asmx-service/",
+		  "url"        : "http://localhost:4000//add-tracing-to-a-legacy-asmx-service/",
 		  "date"       : "2014-02-05 00:00:00 +0000",
 		  "shortdate"  : "February 05, 2014"
 		} 
