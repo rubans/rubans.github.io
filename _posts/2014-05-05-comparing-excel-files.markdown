@@ -20,5 +20,5 @@ However, I recently found a free add Included as part of Excel 2013 which offers
 [http://office.microsoft.com/en-001/excel-help/what-you-can-do-with-spreadsheet-inquire-HA102835926.aspx](http://office.microsoft.com/en-001/excel-help/what-you-can-do-with-spreadsheet-inquire-HA102835926.aspx)
 
 It's also available from your start menu (Windows 7) or through Search Charm (Windows 8) as Speadsheet Compare 2013.
-![Image]({{ site.url }}/Images/posts/SpreadsheetCompare2013.jpg)
+![Image]({{ site.url }}Images/posts/SpreadsheetCompare2013.jpg)
 
