@@ -27,19 +27,19 @@ layout: page
   <nav class="pagination">
     {% if paginator.previous_page %}
       {% if paginator.previous_page == 1 %}
-        <a href="/" class="previous">&laquo; Previous</a>
+        <a href="/" class="btn">&laquo; Previous</a>
       {% else %}
-        <a href="/page{{paginator.previous_page}}" class="previous">&laquo; Previous</a>
+        <a href="/page{{paginator.previous_page}}" class="btn">&laquo; Previous</a>
       {% endif %}
       {% if paginator.next_page %}
         - 
       {% endif %}
     {% endif %}
     {% if paginator.next_page %}
-      <a href="/page{{paginator.next_page}}" class="next">Next &raquo;</a>
+      <a href="/page{{paginator.next_page}}" class="btn">Next &raquo;</a>
     {% endif %}
   {% elsif paginator.total_pages > 1 %}
-      <a href="/page{{paginator.next_page}}" class="next">Next &raquo;</a>    
+      <a href="/page{{paginator.next_page}}" class="btn">Next &raquo;</a>    
   </nav>
 {% endif %}
 </ul>
