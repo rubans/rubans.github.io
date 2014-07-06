@@ -11,7 +11,7 @@ paginate: 2 # the number of post per page
 # Owner/author information
 owner:
   name:           Ruban Siva
-  avatar:         bio-photo.jpg
+  avatar:         https://media.licdn.com/media/p/8/000/1fc/1c5/23601e1.jpg
   email:          rubansiva@hotmail.com
   # Social networking links used in footer. Update and remove as you like.
   twitter:
