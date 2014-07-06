@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Autocomplete Control Using Rx &#8211; Coding Adventures!</title>
+<title>Comparing Excel files &#8211; Coding Adventures!</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
 
@@ -14,16 +14,16 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Autocomplete Control Using Rx">
+<meta property="og:title" content="Comparing Excel files">
 <meta property="og:description" content="">
-<meta property="og:url" content="http://localhost:4000//autocomplete-control-using-rx/">
+<meta property="og:url" content="http://localhost:4000//comparing-excel-files/">
 <meta property="og:site_name" content="Coding Adventures!">
 
 
 
 
 
-<link rel="canonical" href="http://localhost:4000//autocomplete-control-using-rx/">
+<link rel="canonical" href="http://localhost:4000//comparing-excel-files/">
 <link href="http://localhost:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Coding Adventures! Feed">
 
 
@@ -102,7 +102,7 @@
       <header class="entry-header">
         <span class="entry-tags"></span>
         
-          <h1 class="entry-title">Autocomplete Control Using Rx</h1>
+          <h1 class="entry-title">Comparing Excel files</h1>
         
       </header>
       <footer class="entry-meta">
@@ -110,140 +110,41 @@
         <img src="http://localhost:4000//images/bio-photo.jpg" alt="Ruban Siva photo" class="author-photo">
         <span class="author vcard">By <span class="fn"><a href="http://localhost:4000//about/" title="About Ruban Siva">Ruban Siva</a></span></span>
         
-        <span class="entry-date date published"><time datetime="2014-07-02T00:00:00+01:00"><i class="icon-calendar-empty"></i> July 02, 2014</time></span>
+        <span class="entry-date date published"><time datetime="2014-05-05T00:00:00+01:00"><i class="icon-calendar-empty"></i> May 05, 2014</time></span>
         
         
-        <span><a href="http://localhost:4000//autocomplete-control-using-rx/" rel="bookmark" title="Autocomplete Control Using Rx"><i class="icon-link"></i> Permalink</a></span>
+        <span><a href="http://localhost:4000//comparing-excel-files/" rel="bookmark" title="Comparing Excel files"><i class="icon-link"></i> Permalink</a></span>
         
       </footer>
       <div class="entry-content">
-        <p>While attempting to implement a “Goggle search like” auto complete control, I looked at different ways of doing it. 
-What I wanted was to have a Auto complete text box ( similar to Google Search) which would display possible results on each keystroke with some sort of minimum delay so that search is not executed until really necessary.
-Using the Telerik RadAutoComplete WPF control, the usual way would have been to using event handlers to capture key strokes onkeydown event and then perform the search. However, using RX (Reactive Extensions) I found it’s much simpler and able to achieve the objective with less code.</p>
+        <p>I sometimes have the need to compare between different versions of a CSV or Excel file. Often to compare data differences between older and newer versions of the file.</p>
 
-<p>To start with, the original example (without Rx) is available here:
-<a href="http://blogs.telerik.com/xamlteam/posts/14-04-30/how-to-add-minimum-populate-delay-in-radautocompletebox-for-wpf-sliverlight">http://blogs.telerik.com/xamlteam/posts/14-04-30/how-to-add-minimum-populate-delay-in-radautocompletebox-for-wpf-sliverlight</a></p>
+<p>When it’s just a simple CSV file then I initially used some powershell:</p>
 
-<p>The original code which handled the onkey event handlers and search:</p>
-
-<pre><code>public MainWindow()
-{
-    InitializeComponent();
-    this.timer.Interval = TimeSpan.FromSeconds((this.DataContext as ViewModel).SelectedDelay);
-    this.AutoCompleteBox.AddHandler(Control.KeyDownEvent, new KeyEventHandler(OnAutoCompleteBoxKeyDown), true);
-}
-
-private void OnAutoCompleteBoxSearchTextChanged(object sender, EventArgs e)
-{
-    if (this.isDeleting || string.IsNullOrEmpty(this.AutoCompleteBox.SearchText))
-    {
-        this.AutoCompleteBox.Populate(string.Empty);
-    }
-    else
-    {
-        if (this.timer != null &amp;&amp; this.timer.IsEnabled)
-        {
-            this.timer.Stop();
-            this.timer.Start();
-        }
-        else
-        {
-            if (this.timer != null)
-            {
-                this.timer.Start();
-                this.timer.Tick += OnTimerTick;
-            }
-        }
-
-        this.SetStatusBusyIndicator(true);
-        this.DisabledOverlay.Visibility = System.Windows.Visibility.Visible;
-    }
-
-    this.isHandled = true;
-}
-
-private void OnTimerTick(object sender, EventArgs e)
-{
-    this.timer.Stop();
-    this.SetStatusBusyIndicator(false);
-    this.DisabledOverlay.Visibility = System.Windows.Visibility.Collapsed;
-    this.isHandled = false;
-    if (!this.isDeleting)
-    {
-        this.AutoCompleteBox.Populate(this.AutoCompleteBox.SearchText);
-    }
-}
-
-private void OnAutoCompleteBoxPopulating(object sender, CancelRoutedEventArgs e)
-{
-    e.Cancel = this.isHandled;
-}
-
-private void OnAutoCompleteBoxKeyDown(object sender, KeyEventArgs e)
-{
-    if (e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Escape || (Keyboard.Modifiers == ModifierKeys.Control &amp;&amp; e.Key == Key.X))
-    {
-        this.isDeleting = true;
-        this.AutoCompleteBox.IsDropDownOpen = false;
-        this.SetStatusBusyIndicator(false);
-        this.DisabledOverlay.Visibility = System.Windows.Visibility.Collapsed;
-    }
-    else
-    {
-        if (e.Key != Key.Up &amp;&amp; e.Key != Key.Down)
-        {
-            this.AutoCompleteBox.IsDropDownOpen = false;
-            if (e.Key == Key.Enter &amp;&amp; this.isDeleting)
-            {
-                this.isHandled = false;
-                this.AutoCompleteBox.Populate(this.AutoCompleteBox.SearchText);
-            }
-        }
-
-        this.isDeleting = false;
-    }
-}
+<pre><code>Compare-Object $(Get-Content c:\Tfs\Dev\DataDiff\basesample.csv) $(Get-Content C:\Tfs\Dev\DataDiff\samplewithdiffvalues.csv)
 </code></pre>
 
-<p>Using Reactive UI (based on Rx), I was able to refactor it down to:</p>
+<p>This did the job, then I found a decent free comparer for Excel (not CSV format)
+<a href="http://www.grigsoft.com/wincmp3.htm">http://www.grigsoft.com/wincmp3.htm)</a>)</p>
 
-<pre><code>	public ViewModel()
-    {
-        //GetItems();
-        this.delays = new ObservableCollection&lt;int&gt;()
-        {
-            1, 2, 3, 4, 5
-        };
-        this.selectedDelay = this.delays[1];
+<p>If you don’t mind paying a little extra and well worth the licence by the way for the comprehensive compare options it offers (not just Excel), Beyond Compare is great for this.</p>
 
-        var executeSearchCommand = new ReactiveCommand();
-        var results = executeSearchCommand.RegisterAsyncFunction(s =&gt; { return ExecuteSearch(s as string); });
-        _executeSearchCommand = executeSearchCommand;
+<p>However, I recently found a free add Included as part of Excel 2013 which offers great way of visualising the differences:
+<a href="http://office.microsoft.com/en-001/excel-help/what-you-can-do-with-spreadsheet-inquire-HA102835926.aspx">http://office.microsoft.com/en-001/excel-help/what-you-can-do-with-spreadsheet-inquire-HA102835926.aspx</a></p>
 
-        this.ObservableForProperty&lt;ViewModel, string&gt;("SearchText")
-            .Throttle(TimeSpan.FromMilliseconds(800))
-            .Select(x =&gt; x.Value)
-            .DistinctUntilChanged()
-            .Where(x =&gt; !string.IsNullOrWhiteSpace(x))
-            .Subscribe(_executeSearchCommand.Execute);
+<p>It’s also available from your start menu (Windows 7) or through Search Charm (Windows 8) as Speadsheet Compare 2013.
+<img src="../Images/posts/SpreadsheetCompare2013.jpg" alt="Image" /></p>
 
-        _searchResults = new ObservableAsPropertyHelper&lt;ObservableCollection&lt;Item&gt;&gt;(results, _ =&gt; raisePropertyChanged("SearchResults"));
-
-    }
-</code></pre>
-
-<p>So you can cut down a lot of event handling code using Rx and reckon much easier to read without the need for multiple event handler methods.</p>
-
-<p>The full code sample is available on:
-<a href="https://github.com/rubans/gitprojects/tree/master/RadAutoCompleteExample/MinimumPopulateDelayRx">https://github.com/rubans/gitprojects/tree/master/RadAutoCompleteExample/MinimumPopulateDelayRx</a></p>
 
         
       </div><!-- /.entry-content -->
     </div><!-- /.entry-wrapper -->
     <nav class="pagination" role="navigation">
       
-        <a href="http://localhost:4000//installing-ruby-on-windows-the-easy-way/" class="btn" title="Installing Ruby on Windows, the easy Way">Previous article</a>
+        <a href="http://localhost:4000//add-tracing-to-a-legacy-asmx-service/" class="btn" title="Add tracing to a legacy ASMX service">Previous article</a>
       
+      
+        <a href="http://localhost:4000//installing-ruby-on-windows-the-easy-way/" class="btn" title="Installing Ruby on Windows, the easy Way">Next article</a>
       
     </nav><!-- /.pagination -->
   </article>

@@ -9,7 +9,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://localhost:4000//feed.xml" />
 <link rel="alternate" type="text/html" href="http://localhost:4000//" />
-<updated>2014-07-05T17:15:26+01:00</updated>
+<updated>2014-07-06T10:58:29+01:00</updated>
 <id>http://localhost:4000//</id>
 <author>
   <name>Ruban Siva</name>
@@ -154,6 +154,118 @@ private void OnAutoCompleteBoxKeyDown(object sender, KeyEventArgs e)
 
   
   &lt;p&gt;&lt;a href=&quot;http://localhost:4000//autocomplete-control-using-rx/&quot;&gt;Autocomplete Control Using Rx&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://localhost:4000/&quot;&gt;Coding Adventures!&lt;/a&gt; on July 02, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Installing Ruby on Windows, the easy Way]]></title>
+  <link rel="alternate" type="text/html" href="http://localhost:4000//installing-ruby-on-windows-the-easy-way/"/>
+  <id>http://localhost:4000//installing-ruby-on-windows-the-easy-way</id>
+  <published>2014-06-26T00:00:00+01:00</published>
+  <updated>2014-06-26T00:00:00+01:00</updated>
+  <author>
+    <name>Ruban Siva</name>
+    <uri>http://localhost:4000/</uri>
+    <email>rubansiva@hotmail.com</email>
+  </author>
+  
+  <content type="html">
+  
+    &lt;p&gt;There are various ways to setup Ruby and Rails on Windows, but the easiest and quickest way I found to do it was using the Rails bundler for windows found here:
+&lt;a href=&quot;http://railsinstaller.org/en&quot;&gt;http://railsinstaller.org/en&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If you then want to go further and install Jekyll, use the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd C:/Railsinstaller 
+gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That’s it.&lt;/p&gt;
+
+  
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000//installing-ruby-on-windows-the-easy-way/&quot;&gt;Installing Ruby on Windows, the easy Way&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://localhost:4000/&quot;&gt;Coding Adventures!&lt;/a&gt; on June 26, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Comparing Excel files]]></title>
+  <link rel="alternate" type="text/html" href="http://localhost:4000//comparing-excel-files/"/>
+  <id>http://localhost:4000//comparing-excel-files</id>
+  <published>2014-05-05T00:00:00+01:00</published>
+  <updated>2014-05-05T00:00:00+01:00</updated>
+  <author>
+    <name>Ruban Siva</name>
+    <uri>http://localhost:4000/</uri>
+    <email>rubansiva@hotmail.com</email>
+  </author>
+  
+  <content type="html">
+  
+    &lt;p&gt;I sometimes have the need to compare between different versions of a CSV or Excel file. Often to compare data differences between older and newer versions of the file.&lt;/p&gt;
+
+&lt;p&gt;When it’s just a simple CSV file then I initially used some powershell:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Compare-Object $(Get-Content c:\Tfs\Dev\DataDiff\basesample.csv) $(Get-Content C:\Tfs\Dev\DataDiff\samplewithdiffvalues.csv)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This did the job, then I found a decent free comparer for Excel (not CSV format)
+&lt;a href=&quot;http://www.grigsoft.com/wincmp3.htm&quot;&gt;http://www.grigsoft.com/wincmp3.htm)&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;If you don’t mind paying a little extra and well worth the licence by the way for the comprehensive compare options it offers (not just Excel), Beyond Compare is great for this.&lt;/p&gt;
+
+&lt;p&gt;However, I recently found a free add Included as part of Excel 2013 which offers great way of visualising the differences:
+&lt;a href=&quot;http://office.microsoft.com/en-001/excel-help/what-you-can-do-with-spreadsheet-inquire-HA102835926.aspx&quot;&gt;http://office.microsoft.com/en-001/excel-help/what-you-can-do-with-spreadsheet-inquire-HA102835926.aspx&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;It’s also available from your start menu (Windows 7) or through Search Charm (Windows 8) as Speadsheet Compare 2013.
+&lt;img src=&quot;../Images/posts/SpreadsheetCompare2013.jpg&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
+
+
+  
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000//comparing-excel-files/&quot;&gt;Comparing Excel files&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://localhost:4000/&quot;&gt;Coding Adventures!&lt;/a&gt; on May 05, 2014.&lt;/p&gt;</content>
+</entry>
+
+
+<entry>
+  <title type="html"><![CDATA[Add tracing to a legacy ASMX service]]></title>
+  <link rel="alternate" type="text/html" href="http://localhost:4000//add-tracing-to-a-legacy-asmx-service/"/>
+  <id>http://localhost:4000//add-tracing-to-a-legacy-asmx-service</id>
+  <published>2014-02-05T00:00:00+00:00</published>
+  <updated>2014-02-05T00:00:00+00:00</updated>
+  <author>
+    <name>Ruban Siva</name>
+    <uri>http://localhost:4000/</uri>
+    <email>rubansiva@hotmail.com</email>
+  </author>
+  
+  <content type="html">
+  
+    &lt;p&gt;To add tracing to legacy ASMX service for detailed trouble shooting, add the following to the web.config:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;system.diagnostics&amp;gt;
+    &amp;lt;trace autoflush=&quot;true&quot; /&amp;gt;
+    &amp;lt;sources&amp;gt;
+    &amp;lt;source name=&quot;System.Web.Services.Asmx&quot;&amp;gt;
+    &amp;lt;listeners&amp;gt;
+	      &amp;lt;add type=&quot;System.Diagnostics.DefaultTraceListener&quot; name=&quot;Default&quot;&amp;gt;
+	    	&amp;lt;filter type=&quot;&quot; /&amp;gt;
+	      &amp;lt;/add&amp;gt;
+	      &amp;lt;add initializeData=&quot;local.log&quot; type=&quot;System.Diagnostics.TextWriterTraceListener&quot;
+	    name=&quot;AsmxTraceFile&quot; traceOutputOptions=&quot;LogicalOperationStack, DateTime, Timestamp, ProcessId, ThreadId&quot;&amp;gt;
+	    	&amp;lt;filter type=&quot;&quot; /&amp;gt;
+	      &amp;lt;/add&amp;gt;
+    &amp;lt;/listeners&amp;gt;
+      &amp;lt;/source&amp;gt;
+    
+    &amp;lt;/sources&amp;gt;
+    &amp;lt;switches&amp;gt;
+    	&amp;lt;add name=&quot;System.Web.Services.Asmx&quot; value=&quot;Verbose&quot;  /&amp;gt;
+    &amp;lt;/switches&amp;gt;
+&amp;lt;/system.diagnostics&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+
+  
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000//add-tracing-to-a-legacy-asmx-service/&quot;&gt;Add tracing to a legacy ASMX service&lt;/a&gt; was originally published by Ruban Siva at &lt;a href=&quot;http://localhost:4000/&quot;&gt;Coding Adventures!&lt;/a&gt; on February 05, 2014.&lt;/p&gt;</content>
 </entry>
 
 </feed>

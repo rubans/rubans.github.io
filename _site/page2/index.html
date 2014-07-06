@@ -16,14 +16,14 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Coding Adventures!">
 <meta property="og:description" content="">
-<meta property="og:url" content="http://localhost:4000//index.html">
+<meta property="og:url" content="http://localhost:4000//page2/index.html">
 <meta property="og:site_name" content="Coding Adventures!">
 
 
 
 
 
-<link rel="canonical" href="http://localhost:4000//">
+<link rel="canonical" href="http://localhost:4000//page2/">
 <link href="http://localhost:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Coding Adventures! Feed">
 
 
@@ -109,131 +109,30 @@
     <article class="homepage post">
 
       <header>
-        <a href="/autocomplete-control-using-rx/">
+        <a href="/comparing-excel-files/">
           
-          <h1>Autocomplete Control Using Rx</h1>
+          <h1>Comparing Excel files</h1>
         </a>
-        <p class="date">July 02, 2014</p>
+        <p class="date">May 05, 2014</p>
         <p></p>
-        <p><p>While attempting to implement a “Goggle search like” auto complete control, I looked at different ways of doing it. 
-What I wanted was to have a Auto complete text box ( similar to Google Search) which would display possible results on each keystroke with some sort of minimum delay so that search is not executed until really necessary.
-Using the Telerik RadAutoComplete WPF control, the usual way would have been to using event handlers to capture key strokes onkeydown event and then perform the search. However, using RX (Reactive Extensions) I found it’s much simpler and able to achieve the objective with less code.</p>
+        <p><p>I sometimes have the need to compare between different versions of a CSV or Excel file. Often to compare data differences between older and newer versions of the file.</p>
 
-<p>To start with, the original example (without Rx) is available here:
-<a href="http://blogs.telerik.com/xamlteam/posts/14-04-30/how-to-add-minimum-populate-delay-in-radautocompletebox-for-wpf-sliverlight">http://blogs.telerik.com/xamlteam/posts/14-04-30/how-to-add-minimum-populate-delay-in-radautocompletebox-for-wpf-sliverlight</a></p>
+<p>When it’s just a simple CSV file then I initially used some powershell:</p>
 
-<p>The original code which handled the onkey event handlers and search:</p>
-
-<pre><code>public MainWindow()
-{
-    InitializeComponent();
-    this.timer.Interval = TimeSpan.FromSeconds((this.DataContext as ViewModel).SelectedDelay);
-    this.AutoCompleteBox.AddHandler(Control.KeyDownEvent, new KeyEventHandler(OnAutoCompleteBoxKeyDown), true);
-}
-
-private void OnAutoCompleteBoxSearchTextChanged(object sender, EventArgs e)
-{
-    if (this.isDeleting || string.IsNullOrEmpty(this.AutoCompleteBox.SearchText))
-    {
-        this.AutoCompleteBox.Populate(string.Empty);
-    }
-    else
-    {
-        if (this.timer != null &amp;&amp; this.timer.IsEnabled)
-        {
-            this.timer.Stop();
-            this.timer.Start();
-        }
-        else
-        {
-            if (this.timer != null)
-            {
-                this.timer.Start();
-                this.timer.Tick += OnTimerTick;
-            }
-        }
-
-        this.SetStatusBusyIndicator(true);
-        this.DisabledOverlay.Visibility = System.Windows.Visibility.Visible;
-    }
-
-    this.isHandled = true;
-}
-
-private void OnTimerTick(object sender, EventArgs e)
-{
-    this.timer.Stop();
-    this.SetStatusBusyIndicator(false);
-    this.DisabledOverlay.Visibility = System.Windows.Visibility.Collapsed;
-    this.isHandled = false;
-    if (!this.isDeleting)
-    {
-        this.AutoCompleteBox.Populate(this.AutoCompleteBox.SearchText);
-    }
-}
-
-private void OnAutoCompleteBoxPopulating(object sender, CancelRoutedEventArgs e)
-{
-    e.Cancel = this.isHandled;
-}
-
-private void OnAutoCompleteBoxKeyDown(object sender, KeyEventArgs e)
-{
-    if (e.Key == Key.Back || e.Key == Key.Delete || e.Key == Key.Escape || (Keyboard.Modifiers == ModifierKeys.Control &amp;&amp; e.Key == Key.X))
-    {
-        this.isDeleting = true;
-        this.AutoCompleteBox.IsDropDownOpen = false;
-        this.SetStatusBusyIndicator(false);
-        this.DisabledOverlay.Visibility = System.Windows.Visibility.Collapsed;
-    }
-    else
-    {
-        if (e.Key != Key.Up &amp;&amp; e.Key != Key.Down)
-        {
-            this.AutoCompleteBox.IsDropDownOpen = false;
-            if (e.Key == Key.Enter &amp;&amp; this.isDeleting)
-            {
-                this.isHandled = false;
-                this.AutoCompleteBox.Populate(this.AutoCompleteBox.SearchText);
-            }
-        }
-
-        this.isDeleting = false;
-    }
-}
+<pre><code>Compare-Object $(Get-Content c:\Tfs\Dev\DataDiff\basesample.csv) $(Get-Content C:\Tfs\Dev\DataDiff\samplewithdiffvalues.csv)
 </code></pre>
 
-<p>Using Reactive UI (based on Rx), I was able to refactor it down to:</p>
+<p>This did the job, then I found a decent free comparer for Excel (not CSV format)
+<a href="http://www.grigsoft.com/wincmp3.htm">http://www.grigsoft.com/wincmp3.htm)</a>)</p>
 
-<pre><code>	public ViewModel()
-    {
-        //GetItems();
-        this.delays = new ObservableCollection&lt;int&gt;()
-        {
-            1, 2, 3, 4, 5
-        };
-        this.selectedDelay = this.delays[1];
+<p>If you don’t mind paying a little extra and well worth the licence by the way for the comprehensive compare options it offers (not just Excel), Beyond Compare is great for this.</p>
 
-        var executeSearchCommand = new ReactiveCommand();
-        var results = executeSearchCommand.RegisterAsyncFunction(s =&gt; { return ExecuteSearch(s as string); });
-        _executeSearchCommand = executeSearchCommand;
+<p>However, I recently found a free add Included as part of Excel 2013 which offers great way of visualising the differences:
+<a href="http://office.microsoft.com/en-001/excel-help/what-you-can-do-with-spreadsheet-inquire-HA102835926.aspx">http://office.microsoft.com/en-001/excel-help/what-you-can-do-with-spreadsheet-inquire-HA102835926.aspx</a></p>
 
-        this.ObservableForProperty&lt;ViewModel, string&gt;("SearchText")
-            .Throttle(TimeSpan.FromMilliseconds(800))
-            .Select(x =&gt; x.Value)
-            .DistinctUntilChanged()
-            .Where(x =&gt; !string.IsNullOrWhiteSpace(x))
-            .Subscribe(_executeSearchCommand.Execute);
+<p>It’s also available from your start menu (Windows 7) or through Search Charm (Windows 8) as Speadsheet Compare 2013.
+<img src="../Images/posts/SpreadsheetCompare2013.jpg" alt="Image" /></p>
 
-        _searchResults = new ObservableAsPropertyHelper&lt;ObservableCollection&lt;Item&gt;&gt;(results, _ =&gt; raisePropertyChanged("SearchResults"));
-
-    }
-</code></pre>
-
-<p>So you can cut down a lot of event handling code using Rx and reckon much easier to read without the need for multiple event handler methods.</p>
-
-<p>The full code sample is available on:
-<a href="https://github.com/rubans/gitprojects/tree/master/RadAutoCompleteExample/MinimumPopulateDelayRx">https://github.com/rubans/gitprojects/tree/master/RadAutoCompleteExample/MinimumPopulateDelayRx</a></p>
 </p>
       </header>
     </article>
@@ -243,22 +142,36 @@ private void OnAutoCompleteBoxKeyDown(object sender, KeyEventArgs e)
     <article class="homepage post">
 
       <header>
-        <a href="/installing-ruby-on-windows-the-easy-way/">
+        <a href="/add-tracing-to-a-legacy-asmx-service/">
           
-          <h1>Installing Ruby on Windows, the easy Way</h1>
+          <h1>Add tracing to a legacy ASMX service</h1>
         </a>
-        <p class="date">June 26, 2014</p>
+        <p class="date">February 05, 2014</p>
         <p></p>
-        <p><p>There are various ways to setup Ruby and Rails on Windows, but the easiest and quickest way I found to do it was using the Rails bundler for windows found here:
-<a href="http://railsinstaller.org/en">http://railsinstaller.org/en</a></p>
+        <p><p>To add tracing to legacy ASMX service for detailed trouble shooting, add the following to the web.config:</p>
 
-<p>If you then want to go further and install Jekyll, use the following:</p>
-
-<pre><code>cd C:/Railsinstaller 
-gem install jekyll
+<pre><code>&lt;system.diagnostics&gt;
+    &lt;trace autoflush="true" /&gt;
+    &lt;sources&gt;
+    &lt;source name="System.Web.Services.Asmx"&gt;
+    &lt;listeners&gt;
+	      &lt;add type="System.Diagnostics.DefaultTraceListener" name="Default"&gt;
+	    	&lt;filter type="" /&gt;
+	      &lt;/add&gt;
+	      &lt;add initializeData="local.log" type="System.Diagnostics.TextWriterTraceListener"
+	    name="AsmxTraceFile" traceOutputOptions="LogicalOperationStack, DateTime, Timestamp, ProcessId, ThreadId"&gt;
+	    	&lt;filter type="" /&gt;
+	      &lt;/add&gt;
+    &lt;/listeners&gt;
+      &lt;/source&gt;
+    
+    &lt;/sources&gt;
+    &lt;switches&gt;
+    	&lt;add name="System.Web.Services.Asmx" value="Verbose"  /&gt;
+    &lt;/switches&gt;
+&lt;/system.diagnostics&gt;
 </code></pre>
 
-<p>That’s it.</p>
 </p>
       </header>
     </article>
@@ -267,9 +180,15 @@ gem install jekyll
 
 <!-- Pagination links -->
 
-      <a href="/page2" class="next">Next &raquo;</a>    
-  </nav>
-
+  <nav class="pagination">
+    
+      
+        <a href="/" class="previous">&laquo; Previous</a>
+      
+      
+    
+    
+  
 </ul>
       </div><!-- /.entry-content -->
     </div><!-- /.entry-wrapper -->

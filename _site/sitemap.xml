@@ -18,6 +18,10 @@
     </url>
     
     <url>
+        <loc>http://localhost:4000//go/fusion/index.html</loc>
+    </url>
+    
+    <url>
         <loc>http://localhost:4000//index.html</loc>
     </url>
     
@@ -34,13 +38,25 @@
     </url>
     
     <url>
-        <loc>http://localhost:4000//theme-setup/</loc>
+        <loc>http://localhost:4000//page2/index.html</loc>
     </url>
     
 
     
     <url>
         <loc>http://localhost:4000//autocomplete-control-using-rx/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000//installing-ruby-on-windows-the-easy-way/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000//comparing-excel-files/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000//add-tracing-to-a-legacy-asmx-service/</loc>
     </url>
     
 </urlset>
